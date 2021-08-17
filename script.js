@@ -203,13 +203,18 @@ function check() {
         thatsWinner();
     }
     if (hitRight == false) {
+        if (turn > highscore) {
+            highscore = turn - 1;
+            document.querySelector("#highscore").textContent = highscore;
+        }
         flashColor();
         startCounter.innerHTML = 'Wrong Sequence!';
+        gameOn = false;
         setTimeout(() => {
             startCounter.innerHTML = turn;
             clearColor();
         }, 800)
-        compTurn = true;
+        compTurn = false;
         backlight = 0;
         hitRight = true;
         playerSequence = [];
