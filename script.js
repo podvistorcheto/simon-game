@@ -28,6 +28,8 @@ gameOnButton.addEventListener('click', (event) => {
     } else {
         gameOn = false;
         startCounter = "";
+        clearColor();
+        clearInterval(intervalId);
     }
 })
 
@@ -61,7 +63,7 @@ function gameTurn() {
     if (backlight == turn) {
         clearInterval(intervalId);
         compTurn = false;
-        clearColor;
+        clearColor();
         gameOn = true;
     }
 
@@ -211,7 +213,6 @@ function check() {
         startCounter.innerHTML = 'Wrong Sequence!';
         gameOn = false;
         setTimeout(() => {
-            startCounter.innerHTML = turn;
             clearColor();
         }, 800)
         compTurn = false;
