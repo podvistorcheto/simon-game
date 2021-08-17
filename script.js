@@ -7,7 +7,7 @@ let playerSequence = [];
 let backlight;
 let turn;
 let hitRight;
-let gameTurn;
+let compTurn;
 let intervalId;
 let sound = true;
 let playerWins;
@@ -50,21 +50,21 @@ function play() {
         gameSequence.push(Math.floor(Math.random() * 4) + 1);
     }
     console.log(gameSequence);
-    gameTurn = true;
-    intervalId = setInterval(gameFlash, 800);
+    compTurn = true;
+    intervalId = setInterval(gameTurn, 800);
 }
 
-function gameFlash() {
+function gameTurn() {
     gameOn = false;
 
     if (backlight == turn) {
         clearInterval(intervalId);
-        gameTurn = false;
+        compTurn = false;
         clearColor;
         gameOn = true;
     }
 
-    if (gameTurn) {
+    if (compTurn) {
         clearColor();
         setTimeout(() => {
             if (gameSequence[backlight] == 1) one();
@@ -114,8 +114,108 @@ function four() {
 }
 
 function clearColor() {
-    flashGreen.style.backgroundColor = 'darkcolor';
+    flashGreen.style.backgroundColor = 'darkgreen';
     flashRed.style.backgroundColor = 'darkred';
     flashYellow.style.backgroundColor = 'goldenrod';
     flashBlue.style.backgroundColor = 'darkblue';
+}
+
+function flashColor() {
+    flashGreen.style.backgroundColor = 'lightgreen';
+    flashRed.style.backgroundColor = 'tomato';
+    flashYellow.style.backgroundColor = 'yellow';
+    flashBlue.style.backgroundColor = 'lightskyblue';
+}
+
+function thatsWinner() {
+    flashColor();
+    startCounter.innerHTML = "That's a Winner!";
+    gameOn = false;
+    playerWins = true;
+}
+
+flashGreen.addEventListener('click', (event) => {
+    if (gameOn) {
+        playerSequence.push(1);
+        check();
+        one();
+        if (!playerWins) {
+            setTimeout(() => {
+                clearColor();
+            }, 300);
+        }
+    }
+})
+
+
+flashRed.addEventListener('click', (event) => {
+    if (gameOn) {
+        playerSequence.push(2);
+        check();
+        two();
+        if (!playerWins) {
+            setTimeout(() => {
+                clearColor();
+            }, 300);
+        }
+    }
+})
+
+
+flashYellow.addEventListener('click', (event) => {
+    if (gameOn) {
+        playerSequence.push(3);
+        check();
+        three();
+        if (!playerWins) {
+            setTimeout(() => {
+                clearColor();
+            }, 300);
+        }
+    }
+})
+
+flashBlue.addEventListener('click', (event) => {
+    if (gameOn) {
+        playerSequence.push(4);
+        check();
+        four();
+        if (!playerWins) {
+            setTimeout(() => {
+                clearColor();
+            }, 300);
+        }
+    }
+})
+
+
+// function to check the player choice is correct
+
+function check() {
+    if (playerSequence[playerSequence.length - 1] !== gameSequence[playerSequence.length - 1])
+        hitRight = false;
+    if (playerSequence.length == 3 && hitRight == true) {
+        thatsWinner();
+    }
+    if (hitRight == false) {
+        flashColor();
+        startCounter.innerHTML = 'Wrong Sequence!';
+        setTimeout(() => {
+            startCounter.innerHTML = turn;
+            clearColor();
+        }, 800)
+        compTurn = true;
+        backlight = 0;
+        hitRight = true;
+        playerSequence = [];
+        intervalId = setInterval(gameTurn, 800)
+    }
+    if (turn == playerSequence.length && hitRight && !playerWins) {
+        turn++;
+        playerSequence = [];
+        compTurn = true;
+        backlight = 0;
+        startCounter.innerHTML = turn;
+        intervalId = setInterval(gameTurn, 800);
+    }
 }
