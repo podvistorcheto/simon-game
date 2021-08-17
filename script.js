@@ -202,6 +202,7 @@ function check() {
             highscore = turn;
             document.querySelector("#highscore").textContent = highscore;
         }
+        startCounter.innerHTML = 'Thats a Winner!';
         thatsWinner();
     }
     if (hitRight == false) {
