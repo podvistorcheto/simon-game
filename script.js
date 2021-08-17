@@ -11,6 +11,7 @@ let compTurn;
 let intervalId;
 let sound = true;
 let playerWins;
+let highscore = 0;
 
 const gameOnButton = document.querySelector("#on");
 let startCounter = document.querySelector("#turn");
@@ -129,7 +130,7 @@ function flashColor() {
 
 function thatsWinner() {
     flashColor();
-    startCounter.innerHTML = "That's a Winner!";
+    // startCounter.innerHTML = "That's a Winner!";
     gameOn = false;
     playerWins = true;
 }
@@ -195,6 +196,10 @@ function check() {
     if (playerSequence[playerSequence.length - 1] !== gameSequence[playerSequence.length - 1])
         hitRight = false;
     if (playerSequence.length == 3 && hitRight == true) {
+        if (turn > highscore) {
+            highscore = turn;
+            document.querySelector("#highscore").textContent = highscore;
+        }
         thatsWinner();
     }
     if (hitRight == false) {
