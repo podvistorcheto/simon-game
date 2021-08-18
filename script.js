@@ -7,6 +7,7 @@ let playerSequence = [];
 let backlight;
 let turn;
 let hitRight;
+// compTurn tracks whether is player or computer turn
 let compTurn;
 let intervalId;
 let sound = true;
@@ -20,7 +21,9 @@ const flashRed = document.querySelector("#red");
 const flashYellow = document.querySelector("#yellow");
 const flashBlue = document.querySelector("#blue");
 const startButton = document.querySelector("#start");
+const playAgain = document.getElementById("new-game");
 
+// switch on the game console
 gameOnButton.addEventListener('click', (event) => {
     if (gameOnButton.checked == true) {
         gameOn = true;
@@ -33,6 +36,7 @@ gameOnButton.addEventListener('click', (event) => {
     }
 })
 
+// start the game sequence
 startButton.addEventListener('click', (event) => {
     if (gameOn) {
         play();
@@ -40,6 +44,7 @@ startButton.addEventListener('click', (event) => {
     console.log('Start button clicked');
 })
 
+// method to randomize the sequence after clicking the start button
 function play() {
     playerWins = false;
     gameSequence = [];
@@ -54,6 +59,7 @@ function play() {
     }
     console.log(gameSequence);
     compTurn = true;
+    // code for the game starting to flashing the colors
     intervalId = setInterval(gameTurn, 800);
 }
 
@@ -61,6 +67,7 @@ function gameTurn() {
     gameOn = false;
 
     if (backlight == turn) {
+        // calling this method to stop execution of the intervalId variable
         clearInterval(intervalId);
         compTurn = false;
         clearColor();
@@ -116,6 +123,15 @@ function four() {
     flashBlue.style.backgroundColor = 'lightskyblue';
 }
 
+// flashes the color for the player to guess the sequence
+function flashColor() {
+    flashGreen.style.backgroundColor = 'lightgreen';
+    flashRed.style.backgroundColor = 'tomato';
+    flashYellow.style.backgroundColor = 'yellow';
+    flashBlue.style.backgroundColor = 'lightskyblue';
+}
+
+// clears the color backlight for the user to start guessing
 function clearColor() {
     flashGreen.style.backgroundColor = 'darkgreen';
     flashRed.style.backgroundColor = 'darkred';
@@ -123,12 +139,7 @@ function clearColor() {
     flashBlue.style.backgroundColor = 'darkblue';
 }
 
-function flashColor() {
-    flashGreen.style.backgroundColor = 'lightgreen';
-    flashRed.style.backgroundColor = 'tomato';
-    flashYellow.style.backgroundColor = 'yellow';
-    flashBlue.style.backgroundColor = 'lightskyblue';
-}
+
 
 function thatsWinner() {
     flashColor();
@@ -137,6 +148,7 @@ function thatsWinner() {
     playerWins = true;
 }
 
+// functions to flash the colors for the player
 flashGreen.addEventListener('click', (event) => {
     if (gameOn) {
         playerSequence.push(1);
@@ -231,3 +243,16 @@ function check() {
         intervalId = setInterval(gameTurn, 800);
     }
 }
+
+// start new game
+
+// const playNewGame = function () {
+//     if (gameOn) {
+//         play();
+//     } else {
+//         alert('Please click "Game ON" turn on the game console')
+//     }
+// }
+// playNewGame();
+
+// playAgain.addEventListener('click', playNewGame);
