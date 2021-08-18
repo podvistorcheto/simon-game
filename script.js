@@ -190,6 +190,8 @@ flashYellow.addEventListener('click', (event) => {
     }
 })
 
+// 1. pay attention to the repetitive code for these function
+
 flashBlue.addEventListener('click', (event) => {
     if (gameOn) {
         playerSequence.push(4);
