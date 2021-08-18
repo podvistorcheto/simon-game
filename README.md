@@ -7,11 +7,19 @@ m Mini-project for Simon memory game
 
 new task: todo app
 
-a user can enter a new task
-adding a new task will add it to a list
-a task consists of only a single line of text and a status
-a task can be in different states, in progress (default), done or deleted
-a task can be updated by doubleclick
-The user can see a list of all current tasks.
-a task can be marked as completed
-localstorage should persist. So if i reload the page i get the same data
+1. a user can enter a new task
+2. adding a new task will add it to a list
+2. a.  task consists of only a single line of text and a status
+3. a task can be in different states, in progress (default), done or deleted
+9. a task can be updated by doubleclick
+4. The user can see a list of all current tasks.
+5. a task can be marked as completed
+6. localstorage should persist. So if i reload the page i get the same data
+
+More feats
+1. detail overview
+there should be date created and a description
+I can switch between detaill view and list view
+
+2. there should be a rewind button, which undos the last action
+we can only undo one action
